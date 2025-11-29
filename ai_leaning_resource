@@ -1,0 +1,56 @@
+大模型应用开发学习资源汇总（适配业余时间）
+
+一、视频资源（碎片化学习，适合周末或晚上）
+
+1. 吴恩达《AI for Everyone》（非技术背景友好）  
+   • 平台：Coursera（中文字幕）  
+
+   • 内容：从0到1讲解AI与LLM的核心逻辑，适合建立整体认知，无需编程基础。
+
+2. B站《LangChain for LLM Application Development》（吴恩达联合OpenAI推出）  
+   • 链接：https://www.bilibili.com/video/BV1kz4y1x7AK/  
+
+   • 内容：聚焦LangChain框架的实战应用，包含RAG、Agent等核心模块，适合有Python基础的学习者。
+
+3. B站《大模型交叉研讨课》（清华大学刘知远团队）  
+   • 链接：https://www.bilibili.com/video/BV1UG411p7zv/  
+
+   • 内容：覆盖大模型架构、微调、应用全流程，适合进阶学习，理论与实践结合。
+
+二、文档资源（系统学习，适合平时积累）
+
+1. 《大模型应用开发极简入门：基于GPT-4和ChatGPT》（人民邮电出版社）  
+   • 内容：从Prompt工程到LangChain应用，提供大量Python示例，适合快速上手。
+
+2. LangChain官方中文文档  
+   • 链接：https://www.langchain.asia/  
+
+   • 内容：涵盖Models、Prompts、Chains等核心模块，提供500页详细教程，适合深入理解框架逻辑。
+
+3. 《AIGC+机器人：以产业的视角读懂人工智能的未来》（四川科学技术出版社）  
+   • 内容：从产业视角解读AIGC与LLM的应用，适合了解行业趋势。
+
+三、课程资源（结构化学习，适合系统提升）
+
+1. 百度智能云《千帆大模型训练营》（免费直播）  
+   • 平台：百度智能云千帆社区  
+
+   • 内容：围绕千帆平台，讲解大模型选择、场景应用（如物流问答、电商虚拟试衣），适合企业或个人开发者。
+
+2. GitHub《llm-cookbook》（吴恩达课程中文实践）  
+   • 链接：https://github.com/datawhalechina/llm-cookbook  
+
+   • 内容：覆盖Prompt Engineering、RAG、模型微调全流程，提供双语代码示例，适合实战练习。
+
+3. GitHub《self-llm》（开源大模型本地部署）  
+   • 链接：https://github.com/datawhalechina/self-llm  
+
+   • 内容：简化LLaMA、ChatGLM等模型的本地部署流程，包含环境配置、微调方法，适合想自己搭建模型的学习者。
+
+四、学习建议
+
+• 平时（1小时/天）：看视频（如《AI for Everyone》）、读文档（如LangChain官方指南），重点积累概念。  
+
+• 周末（6小时/天）：做课程实战（如《llm-cookbook》的RAG项目）、部署模型（如《self-llm》的本地大模型），巩固技能。  
+
+这些资源均适配业余时间，覆盖“认知-实战-进阶”全流程，适合有Python与大数据基础的学习者快速入门大模型应用开发。
