@@ -15,7 +15,7 @@
 平时（1小时/天）
 
 时间 任务
-第1-2天 读《大模型应用开发入门指南》（CSDN），理解“Prompt-RAG-LangChain”核心链路。
+第1-2天 读《大模型应用开发入门指南》（CSDN），理解“Prompt-RAG-LangChain”核心链路。https://blog.csdn.net/l01011_/article/details/148892423
 第3-5天 补Python薄弱点：用《Python数据分析实战》（Pandas/Requests）速学，重点练API调用（requests发OpenAI API）。
 第6-7天 注册OpenAI/Baidu API（用免费额度），跑通“单句生成”demo（如response = openai.ChatCompletion.create(...)）。
 第8-10天 学向量数据库基础：看《Chroma向量数据库入门》（10分钟文档），理解“文本→向量→存储→检索”流程。
