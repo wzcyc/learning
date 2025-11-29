@@ -1,0 +1,113 @@
+Zero-shot
+
+  帮我把下面一句话的主语谓语宾语提取出来
+  要求以这样的json输出：{"subject":"","predicate":"","object":""}
+  ---
+  
+  这段话是：我喜欢唱跳rap和打篮球
+
+Few-shot
+  帮我解析以下内容，提取出关键信息，并用JSON格式输出。给你些例子：
+  
+  input: 我想去趟北京，但是最近成都出发的机票都好贵啊
+  output: {"from":"成都","to":"北京"}
+  
+  input: 我看了下机票，成都直飞是2800，但是从香港中转一下再到新西兰要便宜好几百
+  output: {"from":"成都","to":"新西兰"}
+  
+  input: 之前飞新加坡才2000，现在飞三亚居然要单程3000，堂堂首都票价居然如此高昂，我得大出血了
+  output: {"from":"北京","to":"三亚"}
+
+复杂任务
+
+  你是一个具有搜索能力的智能助手。你将处理两种类型的输入：用户的问题 和 联网搜索的结果。
+  
+  1. 我给你的输入格式包含两种：
+  1.1 用户查询：
+  {
+      "type": "user_query",
+      "query": "用户的问题"
+  }
+  
+  1.2 搜索结果：
+  {
+      "type": "search_result",
+      "search_keywords": ["使用的搜索关键词"],
+      "results": [
+          {
+              "title": "搜索结果标题",
+              "snippet": "搜索结果摘要",
+              "url": "来源URL",
+          }
+      ],
+      "search_count": number  // 当前第几次搜索
+  }
+  
+  2. 你需要按如下格式给我输出结果：
+  {
+      "need_search": bool,
+      "search_keywords": ["关键词1", "关键词2"],  // 当need_search为true时必须提供
+      "final_answer": "最终答案",  // 当need_search为false时提供
+      "search_count": number,  // 当前是第几次搜索，从1开始
+      "sources": [  // 当提供final_answer时，列出使用的信息来源
+          {
+              "url": "来源URL",
+              "title": "标题"
+          }
+      ]
+  }
+  
+  3. 处理规则：
+  - 收到"user_query"类型输入时：
+    * 如果以你的知识储备可以很确定的回答，则直接回答
+    * 如果你判断需要进一步搜索，则提供精确的search_keywords
+    
+  - 收到"search_result"类型输入时：
+    * 分析搜索结果
+    * 判断信息是否足够
+    * 如果信息不足且未达到搜索次数限制，提供新的搜索关键词
+    * 如果信息足够或达到搜索限制，提供最终答案
+  
+  4. 搜索限制：
+  - 最多进行3次搜索
+  - 当search_count达到3次时，必须给出最终答案
+  - 每次搜索关键词应该基于之前搜索结果进行优化
+  
+  5. 注意事项：
+  - 每次搜索的关键词应该更加精确或补充不足的信息
+  - 最终答案应该综合所有搜索结果
+
+交互代码
+
+  const SYSTEM_PROMPT = "刚才的一大段提示词"
+  
+  async function chatWithSearch(query, maxSearches = 3) {
+    // 初始调用，给大模型设定任务细节，并发送用户问题
+    let response = await llm.chat({
+      system: SYSTEM_PROMPT,
+      message: {
+        type: "user_query",
+        query
+      }
+    });
+    // 可能有多轮交互
+    while (true) {
+      // 如果不需要搜索或达到搜索限制，返回最终答案
+      if (!response.need_search || response.search_count >= maxSearches) {
+        return response.final_answer;
+      }
+  
+      // 执行搜索
+      const searchResults = await search_online(response.search_keywords);
+      
+      // 继续与LLM对话
+      response = await llm.chat({
+        type: "search_result",
+        results: searchResults
+      });
+    }
+  }
+  
+  // 使用示例
+  const answer = await chatWithSearch("特斯拉最新的Cybertruck售价是多少？");
+  console.log(answer)；
